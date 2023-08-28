@@ -36,6 +36,7 @@ def selection_sort(arr : list[float]) -> list[float]:
         temp[i], temp[min_index] = temp[min_index], temp[i];
 
         visualize(temp, [i, min_index])
+        pygame.event.pump()
         clock.tick(60)
 
     return temp
