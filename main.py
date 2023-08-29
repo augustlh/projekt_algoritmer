@@ -10,7 +10,7 @@ screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption(window_title)
 clock = pygame.time.Clock()
 
-n = 400
+n = 200
 width = window_size[0] // n
 arr = [random.randint(10, window_size[1] - 10) for _ in range(n)]
 
@@ -42,6 +42,34 @@ def selection_sort(arr : list[float]) -> list[float]:
 
     return temp
 
+def insertion_sort(arr : list[float]) -> list[float]:
+    temp = arr.copy()
+    for i in range(1, len(temp)):
+        prev_indx = i - 1
+        while temp[i] < temp[prev_indx] and prev_indx >= 0:
+            temp[prev_indx], temp[i] = temp[i],temp[prev_indx]
+            prev_indx -= 1
+
+        visualize(temp, [i, prev_indx])
+        pygame.event.pump()
+        clock.tick(1000)
+    return temp
+
+def bubble_sort(arr : list[float]) -> list[float]:
+    temp = arr.copy()
+
+    for i in range(len(temp)):
+        for j in range(len(temp) - i - 1):
+            if temp[j] > temp[j+1]:
+                temp[j], temp[j+1] = temp[j+1], temp[j]
+            visualize(temp, [j, j+1])
+            pygame.event.pump()
+            clock.tick(60)
+
+
+
+    return temp
+
 
 
 running = True
@@ -50,7 +78,5 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    
-    arr = selection_sort(arr)
-
+    #arr = merge_sort(arr)
 pygame.quit()
