@@ -42,7 +42,7 @@ def selection_sort(arr : list[float]) -> list[float]:
 
     return temp
 
-def insertion_sort(arr : list[float]) -> list[float]:
+def insertions_sort(arr : list[float]) -> list[float]:
     temp = arr.copy()
     for i in range(1, len(temp)):
         prev_indx = i - 1
@@ -64,11 +64,33 @@ def bubble_sort(arr : list[float]) -> list[float]:
                 temp[j], temp[j+1] = temp[j+1], temp[j]
             visualize(temp, [j, j+1])
             pygame.event.pump()
-            clock.tick(60)
-
-
+            clock.tick(1000)
 
     return temp
+
+
+
+
+
+
+
+
+
+
+
+
+def vs(arr : list[float]) -> None:
+    screen.fill((255,255,255))
+
+    for i in range (len(arr)):
+        rect = pygame.Rect(i * width, window_size[1] - arr[i], width, arr[i])
+        pygame.draw.rect(screen, (0,0,0), rect)
+    
+    pygame.display.flip()
+
+
+
+from sorting_algorithms import insertions_sort
 
 
 
@@ -77,6 +99,6 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-    arr = insertion_sort(arr)
+          
+    arr = bubble_sort(arr)
 pygame.quit()
