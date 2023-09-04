@@ -78,5 +78,5 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    #arr = merge_sort(arr)
+    arr = insertion_sort(arr)
 pygame.quit()
