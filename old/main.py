@@ -64,7 +64,7 @@ def bubble_sort(arr : list[float]) -> list[float]:
                 temp[j], temp[j+1] = temp[j+1], temp[j]
             visualize(temp, [j, j+1])
             pygame.event.pump()
-            clock.tick(20000)
+            clock.tick(1000)
 
     return temp
 
@@ -90,7 +90,6 @@ def vs(arr : list[float]) -> None:
 
 
 
-from sorting_algorithms import insertions_sort
 
 
 
@@ -102,3 +101,5 @@ while running:
           
     arr = bubble_sort(arr)
 pygame.quit()
+
+
