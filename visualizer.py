@@ -22,7 +22,6 @@ class Visualizer:
     def await_closure(self : None) -> None:
         while self.status == "Running":
             self.tick(60)
-            pygame.event.pump()
           
 
     def bar_animation(self : None, algorithm : Callable, arr : list[float]) -> None:
@@ -33,9 +32,9 @@ class Visualizer:
         
 
     def bar_visualize(self, arr : list[float], index : int) -> None:
-        self.screen.fill((255,255,255))
+        self.screen.fill((0,0,0))
         for i in range(len(arr)):
-            color = (0,0,0) if i != index else (255,0,0)
+            color = (255,255,255) if i != index else (255,0,0)
             pygame.draw.rect(self.screen, color, (i * bar_width, height - arr[i], bar_width, arr[i]))       
         pygame.display.update()
         

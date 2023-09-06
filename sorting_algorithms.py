@@ -1,4 +1,4 @@
-import random
+import random, math
 from values import width, height
 
 # bubble_sort(arr)
