@@ -4,7 +4,9 @@ from values import n
 
 visualizer = Visualizer("Abe")
 
-visualizer.bar_animation(insertion_sort, generate_data(n))
+#visualizer.bar_animation(bubble_sort, generate_data(n))
 visualizer.bar_animation(selection_sort, generate_data(n))
+visualizer.await_closure()
+visualizer.bar_animation(insertion_sort, generate_data(n))
 visualizer.await_closure()
 

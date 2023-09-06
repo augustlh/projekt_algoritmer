@@ -11,8 +11,8 @@ class Visualizer:
         self.clock = pygame.time.Clock()
         self.status = "Running"
 
-    def tick(self : None) -> None:
-        self.clock.tick(60)
+    def tick(self : None, tickrate : int) -> None:
+        self.clock.tick(tickrate)
         pygame.event.pump()
 
     def close(self : None) -> None:
@@ -21,17 +21,22 @@ class Visualizer:
 
     def await_closure(self : None) -> None:
         while self.status == "Running":
-            self.tick()
-
+            self.tick(60)
+            pygame.event.pump()
+          
 
     def bar_animation(self : None, algorithm : Callable, arr : list[float]) -> None:
-        for x in algorithm(arr):
-            self.tick()
-            self.visualize(x)
+        for x, y in algorithm(arr):
+            self.tick(60)
+            self.bar_visualize(x, y)
+            
+        
 
-    def visualize(self, arr : list[float]) -> None:
+    def bar_visualize(self, arr : list[float], index : int) -> None:
         self.screen.fill((255,255,255))
         for i in range(len(arr)):
-            pygame.draw.rect(self.screen, (0,0,0), (i * bar_width, height - arr[i], bar_width, arr[i]))
+            color = (0,0,0) if i != index else (255,0,0)
+            pygame.draw.rect(self.screen, color, (i * bar_width, height - arr[i], bar_width, arr[i]))       
         pygame.display.update()
+        
 
