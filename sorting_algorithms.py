@@ -1,4 +1,5 @@
 import random
+from values import width, height
 
 # bubble_sort(arr)
 def bubble_sort(arr : list[float]) -> list[float]:
@@ -34,3 +35,6 @@ def insertion_sort(arr : list[float]) -> list[float]:
             prev_indx -= 1
         arr[prev_indx + 1] = key
         yield arr
+
+def generate_data(size : int) -> list[float]:
+    return [random.randint(10, height - 10) for _ in range(size)]
