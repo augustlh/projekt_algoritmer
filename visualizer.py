@@ -32,19 +32,18 @@ class Visualizer:
                     
           
     def bar_animation(self, algorithm : Callable, arr : list[float]) -> None:
-        tickrate = 0
-        if algorithm == bubble_sort: tickrate = 3600
+        if algorithm == bubble_sort: tickrate = 0
         else: tickrate = 60
         for x, y in algorithm(arr):
-            self.tick(tickrate)
+            self.tick(60)
             self.bar_visualize(x, y)
 
-        #now iterate through the array and make every bar green
         for i in range(len(x)):
+            self.tick(240)
             color = (0,255,0)
             pygame.draw.rect(self.screen, color, (i * bar_width, height - x[i], bar_width, x[i]))   
             pygame.display.update()
-            
+     
     def bar_visualize(self, arr : list[float], index : int) -> None:
         self.screen.fill((0,0,0))
         for i in range(len(arr)):
