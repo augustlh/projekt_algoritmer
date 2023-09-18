@@ -38,35 +38,14 @@ def insertion_sort(arr : list[float]) -> list[float]:
         temp[prev_indx + 1] = key
         yield temp, prev_indx + 1
 
-def merge_sort(arr):
-    if len(arr) <= 1:
-        return arr
-    
-    middle = len(arr) // 2
-    left = arr[:middle]
-    right = arr[middle:]
+def quick_sort(arr : list[float]) -> list[float]:
+    pass
 
-    left = merge_sort(left)
-    right = merge_sort(right)
-
-    return list(merge(left,right))
+def merge_sort(arr : list[float]) -> list[float]:
+    pass
 
 
-def merge(left, right):
-    res = []
 
-    while len(left) and len(right):
-        if left[0] < right[0]:
-            res.append(left.pop(0))
-        else:
-            res.append(right.pop(0))
-
-    if len(left):
-        res += left
-    else:
-        res += right
-
-    return res
 
 
 def generate_data(size : int) -> list[float]:

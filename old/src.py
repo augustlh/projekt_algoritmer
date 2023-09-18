@@ -2,7 +2,7 @@ import random
 import pygame
 
 # -- pygame stuff --
-window_size = (800, 600)
+window_size = (1000, 600)
 screen = pygame.display.set_mode(window_size)
 pygame.display.set_caption("Visualisering af sorteringsalgoritmer")
 clock = pygame.time.Clock()
