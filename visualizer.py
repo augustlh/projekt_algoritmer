@@ -21,7 +21,9 @@ class Visualizer:
 
     def await_closure(self) -> None:
         while self.status == "Running":
-            self.tick(60)
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    self.close()
 
     def await_keypress(self, key : str):
         while True:
@@ -35,9 +37,10 @@ class Visualizer:
         if algorithm == bubble_sort: tickrate = 0
         else: tickrate = 60
         for x, y in algorithm(arr):
-            self.tick(60)
+            self.tick(tickrate)
             self.bar_visualize(x, y)
 
+        #tegn grøn bar efter sort er færdig
         for i in range(len(x)):
             self.tick(240)
             color = (0,255,0)
