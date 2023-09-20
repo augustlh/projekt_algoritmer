@@ -45,14 +45,9 @@ def merge_sort(arr : list[float]) -> list[float]:
     pass
 
 
-
-
-
 def generate_data(size : int) -> list[float]:
     for i in range(size):
-        #it should go from 0 to height
         return shuffle_data([i * height / size for i in range(size)])
-    #return [random.randint(10, height - 10) for _ in range(size)]
 
 
 def shuffle_data(arr : list[float]) -> list[float]:
