@@ -35,6 +35,7 @@ class Visualizer:
           
     def bar_animation(self, algorithm : Callable, arr : list[float]) -> None:
         if algorithm == bubble_sort: tickrate = 0
+        elif algorithm == mergeSort or augussySort: tickrate = 120
         else: tickrate = 60
         for x, y in algorithm(arr):
             self.tick(tickrate)
