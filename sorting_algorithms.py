@@ -41,6 +41,17 @@ def insertion_sort(arr : list[float]) -> list[float]:
 def quick_sort(arr : list[float]) -> list[float]:
     pass
 
+def stalin_sort(arr):
+    i = 0
+    while i < len(arr) - 1:
+        if arr[i] > arr[i + 1]:
+            arr.pop(i + 1)  # Remove the element at index i+1
+        else:
+            i += 1
+        yield arr, i+1,i
+
+
+
 
 def merge(arr, l, m, r):
     n1 = m - l + 1

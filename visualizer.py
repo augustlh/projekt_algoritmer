@@ -52,6 +52,7 @@ class Visualizer:
             pygame.display.update()
 
     def bar_visualize(self, arr : list[float], index : int, index2 = -1) -> None:
+        bar_width = width / len(arr)
         self.screen.fill((0,0,0))
         for i in range(len(arr)):
             #color = (255,255,255) if i != index else (255,0,0)
