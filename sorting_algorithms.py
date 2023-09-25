@@ -9,7 +9,7 @@ def bubble_sort(arr : list[float]) -> list[float]:
         for j in range(len(temp) - i - 1):
             if temp[j] > temp[j+1]:
                 temp[j], temp[j+1] = temp[j+1], temp[j]
-            yield temp, j + 1
+            yield temp, j + 1, j
 
 # selection_sort(arr)
 def selection_sort(arr : list[float]) -> list[float]:
@@ -23,7 +23,7 @@ def selection_sort(arr : list[float]) -> list[float]:
                 min_index = j
 
         temp[i], temp[min_index] = temp[min_index], temp[i];
-        yield temp, min_index
+        yield temp, min_index, i
 
 # insertion_sort(arr)
 def insertion_sort(arr : list[float]) -> list[float]:
@@ -36,7 +36,7 @@ def insertion_sort(arr : list[float]) -> list[float]:
             temp[prev_indx + 1] = temp[prev_indx]
             prev_indx -= 1
         temp[prev_indx + 1] = key
-        yield temp, prev_indx + 1
+        yield temp, prev_indx + 1, i
 
 def quick_sort(arr : list[float]) -> list[float]:
     pass
@@ -67,21 +67,21 @@ def merge(arr, l, m, r):
             j += 1
         k += 1
 
-        yield arr, k
+        yield arr, k, -1
                 
 
     while i < n1:
         arr[k] = L[i]
         i += 1
         k += 1
-        yield arr, 0
+        yield arr, 0, -1
 
     while j < n2:
         arr[k] = R[j]
         j += 1
         k += 1
                 
-        yield arr, 0
+        yield arr, 0, -1
 
 def mergeSort(arr, l= 0, r=None):
     if r is None:
@@ -110,9 +110,13 @@ def augussySort(arr, l= 0, r= 1):
         current_size = 2 * current_size
 
 
-def generate_data(size : int) -> list[float]:
-    for i in range(size):
-        return shuffle_data([i * height / size for i in range(size)])
+def generate_data(size : int, type : str) -> list[float]:
+    if type == "bar":
+        for i in range(size):
+            return shuffle_data([i * height / size for i in range(size)])
+    else:
+        for i in range(size):
+            return shuffle_data([i for i in range (size)])
 
 
 def shuffle_data(arr : list[float]) -> list[float]:
