@@ -68,7 +68,7 @@ class Visualizer:
             self.box_visualize(x,y,z)
 
     def box_visualize(self, arr : list[float], index2 : int, index : int) -> None:
-        self.screen.fill((40,40,40))
+        self.screen.fill((0,0,0))
         l = 40
         x_coordinates = np.linspace(0, width - l, len(arr))
         for i in range(len(arr)):

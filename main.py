@@ -15,5 +15,5 @@ visualizer = Visualizer("Visualisering af sorterings algoritmer")
 #visualizer.await_keypress('c')
 
 #box animations
-visualizer.box_animation(mergeSort, generate_data(size=10, type="box"))
+visualizer.box_animation(insertion_sort, generate_data(size=10, type="box"))
 visualizer.await_closure()
