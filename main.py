@@ -3,7 +3,7 @@ from sorting_algorithms import bubble_sort, selection_sort, insertion_sort, gene
 from values import n
 
 visualizer = Visualizer("Visualisering af sorterings algoritmer")
-""" visualizer.bar_animation(mergeSort, generate_data(n, type="bar"))
+visualizer.bar_animation(mergeSort, generate_data(n, type="bar"))
 visualizer.await_keypress('c')
 #visualizer.bar_animation(augussySort, generate_data(n))
 #visualizer.await_keypress('c')
@@ -12,7 +12,7 @@ visualizer.await_keypress('c')
 visualizer.bar_animation(selection_sort, generate_data(size=n, type="bar"))
 visualizer.await_keypress('c')
 visualizer.bar_animation(insertion_sort, generate_data(size=n, type="bar"))
-visualizer.await_keypress('c') """
+visualizer.await_keypress('c')
 
 #visualizer.bar_animation(stalin_sort, generate_data(size=n, type="bar"))
 #visualizer.await_keypress('c')
