@@ -84,3 +84,15 @@ class Visualizer:
 
             pygame.time.wait(100)
         pygame.display.update()
+
+
+class Box:
+    def __init__(self, size, pos, color, screen) -> None:
+        self.size = size
+        self.pos = pos
+        self.value = value
+        self.color = color
+        self.screen = screen
+
+    def show(self):
+        pygame.draw.rect(self.screen, self.color, (self.pos[0], self.pos[1], self.size, self.size))
