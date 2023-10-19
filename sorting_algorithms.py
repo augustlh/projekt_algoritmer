@@ -50,6 +50,73 @@ def stalin_sort(arr):
             i += 1
         yield arr, i+1,i
 
+""" def radixSort(array):
+    temp = array.copy()
+
+    #make temp integers
+    for i in range(len(temp)):
+        temp[i] = int(temp[i])
+
+    largestDigit = int(max(temp))
+
+    for digit in range (1,largestDigit):
+        #Lav bins til hver 
+        bins = [[] for i in range(10)] 
+
+        #Tildel hvert element til en bin
+        for i in temp:
+            bins[(i // digit) % 10].append(i)
+
+        #Saml elementerne fra hver bin
+        temp = []
+        for bin in bins:
+            temp.extend(bin)
+        yield temp, 0, 0 """
+
+def radixSort(array):
+    temp = array.copy()
+
+    for i in range(len(temp)):
+        temp[i] = int(temp[i])
+
+
+    width = len(str(max(temp)))
+    currDigitExp = 1
+
+    for i in range(1, width + 1):
+        yield from countingSort(array=temp, exp=currDigitExp)
+        currDigitExp *= 10
+        #yield temp, 0, 0
+
+    
+
+def countingSort(array, exp):
+    k = len(array)
+    bins = [0 for _ in range(10)]
+    output = [0 for _ in range(k)]
+
+    # Tæl antal forekomster af hvert af cifret fundet ved exp
+    for i in range(k):
+        bins[array[i] // exp % 10] += 1
+
+    # Find den kummulative sum af antal forekomster
+    for j in range(1, 10):
+        bins[j] += bins[j - 1]
+
+    # Placer elementerne i output arrayet i den rigtige rækkefølge
+    for p in range(k - 1, -1, -1):
+        output[bins[array[p] // exp % 10] - 1] = array[p]
+        #yield output, bins[array[p] // exp % 10] - 1, p
+        bins[array[p] // exp % 10] -= 1
+
+
+
+    # Kopier output arrayet til arrayet
+    for l in range(k):
+        array[l] = output[l]
+        #yield array, l, bins[]
+        yield array, l, -1
+
 
 
 
