@@ -93,11 +93,12 @@ def radixSort(array):
 def countingSort(array, exp):
     k = len(array)
     bins = [0 for _ in range(10)]
-    output = [0 for _ in range(k)]
+    output = array.copy()#[0 for _ in range(k)]
 
     # Tæl antal forekomster af hvert af cifret fundet ved exp
     for i in range(k):
         bins[array[i] // exp % 10] += 1
+        yield output, i, -1
 
     # Find den kummulative sum af antal forekomster
     for j in range(1, 10):
@@ -106,17 +107,16 @@ def countingSort(array, exp):
     # Placer elementerne i output arrayet i den rigtige rækkefølge
     for p in range(k - 1, -1, -1):
         output[bins[array[p] // exp % 10] - 1] = array[p]
-        #yield output, bins[array[p] // exp % 10] - 1, p
         bins[array[p] // exp % 10] -= 1
+        
+        yield output, bins[array[p] // exp % 10] - 1, p # ændre til -1, hvis ikke du vil have den grønne bar
 
 
 
     # Kopier output arrayet til arrayet
     for l in range(k):
         array[l] = output[l]
-        #yield array, l, bins[]
-        yield array, l, -1
-
+    #    #yield array, l, bins[]
 
 
 

@@ -18,9 +18,9 @@ class Box:
 
     def show(self, screen):
         pygame.draw.rect(screen,self.color, pygame.Rect(self.pos[0], self.pos[1], 50, 50))
-        font = pygame.font.Font(None, 36)
-        text = font.render(str(self.value), True, (0, 255, 0))
-        screen.blit(text, (self.pos[0] + 20, self.pos[1] + 20))
+        #font = pygame.font.Font(None, 36)
+        #text = font.render(str(self.value), True, (0, 255, 0))
+        #screen.blit(text, (self.pos[0] + 20, self.pos[1] + 20))
 
 
 #Draw the boxes on the screen
@@ -48,18 +48,26 @@ array = [237,210,27,12,1,5]
 #boxes = [Box(np.array([i * 100, 50]), (255, 255, 255)) for i in range(len(array))]
 
 
-def swap(box1, box2, boxes):
+def swap(box1, box2, boxes, arr):
     box1.targetPos, box2.targetPos = box2.pos, box1.pos
-    box1.value, box2.value = box2.value, box1.value
+    #box1.value, box2.value = box2.value, box1.value
 
     while True:
         clock.tick(120)
         box1.update()
         box2.update()
+        
 
         screen.fill((0, 0, 0))
         for i in range(len(boxes)):
             boxes[i].show(screen)
+
+        for i in range(len(arr)):
+            font = pygame.font.Font('freesansbold.ttf', 32)
+            text = font.render(str(arr[i]), True, (255, 255, 255), (0, 0, 0))
+            textRect = text.get_rect()
+            textRect.center = (boxes[i].pos[0] + 25, boxes[i].pos[1] + 25)
+            screen.blit(text, textRect)
 
         pygame.display.update()
         
@@ -90,20 +98,21 @@ def insertion_sort(arr : list[float]) -> list[float]:
 def box_sort(algorithm, arr : list[float]) -> None:
     #boxes = [Box(np.array([i * 100, 50]), (255, 255, 255)) for i in range(len(arr))]
     boxes = [Box(np.array([i * 100, 50]), (255, 255, 255), arr[i]) for i in range(len(arr))]
-    clock.tick(60)
+    valueArray = arr.copy()
+    #clock.tick(60)
     screen.fill((0, 0, 0))
 
     for x, y, z in algorithm(arr):
         boxes[y].color = (255, 0, 0)
         boxes[z].color = (0, 0, 255)
-        swap(boxes[y], boxes[z], boxes)
+        swap(boxes[y], boxes[z], boxes, valueArray)
+        valueArray[y], valueArray[z] = valueArray[z], valueArray[y]
         # Change the boxes array to reflect the new order
         boxes[y], boxes[z] = boxes[z], boxes[y]
         # Swap the box valeus
         boxes[y].color = (255, 255, 255)
         boxes[z].color = (255, 255, 255)
-
-    print(x)
+    print(valueArray)
 
 #box_sort(bubble_sort, array)
 print("New sort")
