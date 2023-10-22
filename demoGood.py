@@ -49,7 +49,7 @@ def swapBoxes(boxIndex, boxIndex2, boxes):
     #While the boxes are not in their target positions upodate the boxes and show all the boxes
     while np.linalg.norm(boxes[boxIndex].pos - boxes[boxIndex].targetPos) > 0.1 and np.linalg.norm(boxes[boxIndex2].pos - boxes[boxIndex2].targetPos) > 0.1:
         screen.fill((0, 0, 0))
-        clock.tick(60)
+        clock.tick(30)
         boxes[boxIndex].update()
         boxes[boxIndex2].update()
         showBoxes(boxes)
@@ -68,10 +68,11 @@ def boxSort(algorithm, arr : list[float]) -> None:
     boxDistance = 800 / n 
     boxSize = boxDistance * 0.8
 
-    boxes = [Box(np.array([i * boxDistance, 50]), (255, 255, 255), boxSize, arr[i]) for i in range(len(arr))]
+    boxes = [Box(np.array([i * boxDistance, screen.get_height()/2 - boxSize/2]), (255, 255, 255), boxSize, arr[i]) for i in range(len(arr))]
 
     print("ArrayØ:", arr)
     for x, y, z in algorithm(arr):
+        clock.tick(10)
         print("Array:", x, y, z)
         
         #If all the values in x are not the same as the values in arr then set var swap to true
