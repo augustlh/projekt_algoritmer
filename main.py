@@ -10,7 +10,7 @@ visualizer.await_keypress('c')
 
 visualizer.bar_animation(mergeSort, generate_data(n, type="bar"))
 visualizer.await_keypress('c')
-#visualizer.bar_animation(augussySort, generate_data(n))
+#visualizer.bar_animation(acccccccccccccccccccugussySort, generate_data(n))
 #visualizer.await_keypress('c')
 #visualizer.bar_animation(bubble_sort, generate_data(n, type="bar"))
 #visualizer.await_keypress('c')

@@ -44,7 +44,7 @@ clock = pygame.time.Clock()
 await_keypress('c') """
 
 
-array = [237,210,27,12,1,5]
+array = [1, 237,210,27,12,1,5]
 #boxes = [Box(np.array([i * 100, 50]), (255, 255, 255)) for i in range(len(array))]
 
 
