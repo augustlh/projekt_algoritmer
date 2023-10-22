@@ -49,7 +49,7 @@ def swapBoxes(boxIndex, boxIndex2, boxes):
     #While the boxes are not in their target positions upodate the boxes and show all the boxes
     while np.linalg.norm(boxes[boxIndex].pos - boxes[boxIndex].targetPos) > 0.1 and np.linalg.norm(boxes[boxIndex2].pos - boxes[boxIndex2].targetPos) > 0.1:
         screen.fill((0, 0, 0))
-        clock.tick(30)
+        clock.tick(60)
         boxes[boxIndex].update()
         boxes[boxIndex2].update()
         showBoxes(boxes)
@@ -68,40 +68,20 @@ def boxSort(algorithm, arr : list[float]) -> None:
     boxDistance = 800 / n 
     boxSize = boxDistance * 0.8
 
-    boxes = [Box(np.array([i * boxDistance, screen.get_height()/2 - boxSize/2]), (255, 255, 255), boxSize, arr[i]) for i in range(len(arr))]
-
-    print("ArrayØ:", arr)
     for x, y, z in algorithm(arr):
-        clock.tick(10)
-        print("Array:", x, y, z)
-        
-        #If all the values in x are not the same as the values in arr then set var swap to true
-        swap = False
+        boxes = [Box(np.array([i * boxDistance, screen.get_height()/2 - boxSize/2]), (255, 255, 255), boxSize, arr[i]) for i in range(len(arr))]
+        clock.tick(60)
+        # Skal to bokse bytte plads?
+        swap = x[y] != arr[y] or x[z] != arr[z]
 
-        for i in range(len(x)):
-            if x[i] != arr[i]:
-                swap = True
-                break
-        
-        for box in boxes:
-            box.color = (255, 255, 255)
-
-        #Change the color of the boxes that are being compared
-        boxes[y].color = (255, 0, 0)
-        boxes[z].color = (0, 0, 255)
-
+        for i in range(len(boxes)):
+            boxes[i].color = (0, 255, 0) if i == y else (255, 0, 0) if i == z else (255, 255, 255)
         showBoxes(boxes)
 
-        #If swap is true then swap the boxes
         if swap:
             swapBoxes(y, z, boxes)
             arr[y], arr[z] = arr[z], arr[y]
 
-        print("Boxes:", [box.value for box in boxes])
-
-        #y and z er index for de to boxes der sammenlignes
-        #
-        
 
 
 def bubble_sort(arr : list[float]) -> list[float]:
@@ -113,8 +93,43 @@ def bubble_sort(arr : list[float]) -> list[float]:
                 temp[j], temp[j+1] = temp[j+1], temp[j]
             yield temp, j + 1, j
 
+def selection_sort(arr : list[float]) -> list[float]:
+    temp = arr.copy()
 
-boxSort(bubble_sort, [1, 5, 8, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+    for i in range(len(temp)):
+        min_index = i
+
+        for j in range(i + 1, len(temp)):
+            if temp[j] < temp[min_index]:
+                min_index = j
+
+        temp[i], temp[min_index] = temp[min_index], temp[i];
+        yield temp, min_index, i
+
+# insertion_sort(arr)
+def insertion_sort(arr : list[float]) -> list[float]:
+    temp = arr.copy()
+
+    for i in range(1, len(temp)):
+        key = temp[i]
+        prev_indx = i - 1
+        while prev_indx >= 0 and key < temp[prev_indx]:
+            temp[prev_indx + 1] = temp[prev_indx]
+            prev_indx -= 1
+        temp[prev_indx + 1] = key
+        yield temp, prev_indx + 1, i
+
+def stalin_sort(arr):
+    i = 0
+    while i < len(arr) - 1:
+        if arr[i] > arr[i + 1]:
+            arr.pop(i + 1)  # Remove the element at index i+1
+        else:
+            i += 1
+        yield arr, i+1,i
+
+
+boxSort(stalin_sort, [1, 5, 8, 1, 2, 3, 4, 5, 6, 7, 8, 9])
         
 
 #while True:

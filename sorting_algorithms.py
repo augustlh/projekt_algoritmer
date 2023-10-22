@@ -38,42 +38,15 @@ def insertion_sort(arr : list[float]) -> list[float]:
         temp[prev_indx + 1] = key
         yield temp, prev_indx + 1, i
 
-def quick_sort(arr : list[float]) -> list[float]:
-    pass
-
-def stalin_sort(arr):
+def stalin_sort(arr : list[float]):
     i = 0
     while i < len(arr) - 1:
         if arr[i] > arr[i + 1]:
-            arr.pop(i + 1)  # Remove the element at index i+1
-        else:
-            i += 1
+            arr.pop(i + 1) 
+        else: i += 1
         yield arr, i+1,i
 
-""" def radixSort(array):
-    temp = array.copy()
-
-    #make temp integers
-    for i in range(len(temp)):
-        temp[i] = int(temp[i])
-
-    largestDigit = int(max(temp))
-
-    for digit in range (1,largestDigit):
-        #Lav bins til hver 
-        bins = [[] for i in range(10)] 
-
-        #Tildel hvert element til en bin
-        for i in temp:
-            bins[(i // digit) % 10].append(i)
-
-        #Saml elementerne fra hver bin
-        temp = []
-        for bin in bins:
-            temp.extend(bin)
-        yield temp, 0, 0 """
-
-def radixSort(array):
+def radix_sort(array : list[int]):
     temp = array.copy()
 
     for i in range(len(temp)):
@@ -84,13 +57,12 @@ def radixSort(array):
     currDigitExp = 1
 
     for i in range(1, width + 1):
-        yield from countingSort(array=temp, exp=currDigitExp)
+        yield from counting_sort(array=temp, exp=currDigitExp)
         currDigitExp *= 10
-        #yield temp, 0, 0
 
     
 
-def countingSort(array, exp):
+def counting_sort(array : list[int], exp : int):
     k = len(array)
     bins = [0 for _ in range(10)]
     output = array.copy()#[0 for _ in range(k)]
@@ -119,22 +91,18 @@ def countingSort(array, exp):
     #    #yield array, l, bins[]
 
 
-
+# Inspireret af https://www.geeksforgeeks.org/python-program-for-merge-sort/
 def merge(arr, l, m, r):
     n1 = m - l + 1
     n2 = r - m
-    L = [0] * (n1)
-    R = [0] * (n2)
 
-    for i in range(0, n1):
-        L[i] = arr[l + i]
-
-    for j in range(0, n2):
-        R[j] = arr[m + 1 + j]
+    L = arr[l:m+1]
+    R = arr[m+1:r+1]
 
     i = 0
     j = 0
     k = l
+
 
     while i < n1 and j < n2:
         if L[i] <= R[j]:
@@ -147,7 +115,6 @@ def merge(arr, l, m, r):
 
         yield arr, k, -1
                 
-
     while i < n1:
         arr[k] = L[i]
         i += 1
@@ -171,22 +138,6 @@ def mergeSort(arr, l= 0, r=None):
         yield from mergeSort(arr, l, m)
         yield from mergeSort(arr, m + 1, r)
         yield from merge(arr, l, m, r) 
-
-def augussySort(arr, l= 0, r= 1):
-    n = len(arr)
-    current_size = 1
-
-    while current_size < n:
-        left = 0
-
-        while left < n - 1:
-            mid = min((left + current_size - 1), (n - 1))
-            right = ((2 * current_size + left - 1, n - 1)[2 * current_size + left - 1 > n - 1])
-            yield from merge(arr, left, mid, right)
-            left = left + current_size * 2
-
-        current_size = 2 * current_size
-
 
 def generate_data(size : int, type : str) -> list[float]:
     if type == "bar":
