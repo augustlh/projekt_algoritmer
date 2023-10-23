@@ -65,7 +65,7 @@ def radix_sort(array : list[int]):
 def counting_sort(array : list[int], exp : int):
     k = len(array)
     bins = [0 for _ in range(10)]
-    output = array.copy()#[0 for _ in range(k)]
+    output = array.copy()
 
     # Tæl antal forekomster af hvert af cifret fundet ved exp
     for i in range(k):
