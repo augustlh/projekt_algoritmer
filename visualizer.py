@@ -102,7 +102,6 @@ class Visualizer:
     def swapBoxes(self, boxIndex, boxIndex2, boxes):
         boxes[boxIndex].targetPos, boxes[boxIndex2].targetPos = boxes[boxIndex2].pos, boxes[boxIndex].pos
 
-        #While the boxes are not in their target positions upodate the boxes and show all the boxes
         while np.linalg.norm(boxes[boxIndex].pos - boxes[boxIndex].targetPos) > 0.1 and np.linalg.norm(boxes[boxIndex2].pos - boxes[boxIndex2].targetPos) > 0.1:
             self.screen.fill((0, 0, 0))
             self.showName()
@@ -138,12 +137,8 @@ class Box:
             self.pos = lerp(self.pos, self.targetPos, speed)
 
     def show(self, screen):
-        #box
         pygame.draw.rect(screen,self.color, pygame.Rect(self.pos[0], self.pos[1], self.size, self.size))
 
-        #text
-        #Dtermine font size based on box size
-        #fontSize = int(self.size * 0.8)
         font = pygame.font.Font('freesansbold.ttf', int(self.size * 0.4) )
         text = font.render(str(self.value), True, (0,0,0))
         textRect = text.get_rect()
